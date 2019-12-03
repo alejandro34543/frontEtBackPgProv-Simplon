@@ -22,5 +22,5 @@ class compte(Base):
     Namespace = Column(String)
 
     def __repr__(self):
-        return "<compte(ID='{}', Nom='{}', Owner='{}', User='{}', Password='{}', Namespace='{}')>"\
+        return "ID='{}', Nom='{}', Owner='{}', User='{}', Password='{}', Namespace='{}'\n"\
                 .format(self.ID, self.Nom, self.Owner, self.User, self.Password, self.Namespace)
