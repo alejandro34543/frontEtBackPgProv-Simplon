@@ -9,7 +9,7 @@
     <button id="action">Lancer la requête AJAX</button><br />
 
     <script src="jquery.js"></script>
-    <script>
+    <!-- <script>
       $(function() {
         $('#action').click(function() {
           $.ajax({
@@ -24,19 +24,47 @@
         });
       });
       </script>
+    -->
 
-      <script>
-        $(function() {
+    <script>
+      var response = "[{
+        "rank":"9",
+        "content":"Alon",
+        "UID":"5"
+       },
+       {
+         "rank":"6",
+         "content":"Tala",
+         "UID":"6"
+      }]";
+
+      // convert string to JSON
+      response = $.parseJSON(response);
+
+
+      $(function() {
+        $.ajax({
+          type: 'GET',
+          url: 'http://127.0.0.1:5000/data',
+          timeout: 3000,
+          success: function(data) {
             $.each(response, function(i, item) {
-                var $tr = $('<tr>').append(
-                    $('<td>').text(item.rank),
-                    $('<td>').text(item.content),
-                    $('<td>').text(item.UID)
-                ); //.appendTo('#records_table');
-                console.log($tr.wrap('<p>').html());
+              var $tr = $('<tr>').append(
+                  $('<td>').text(item.ID),
+                  $('<td>').text(item.Nom),
+                  $('<td>').text(item.Owner),
+                  $('<td>').text(item.User),
+                  $('<td>').text(item.Password),
+                  $('<td>').text(item.Namespace)
+              ); //.appendTo('#records_table');
+              console.log($tr.wrap('<p>').html());
             });
+          },
+          error: function() {
+              alert('La requête n\'a pas abouti'); }
         });
-      </script>
+      });
+    </script>
 
   </body>
 </html>
