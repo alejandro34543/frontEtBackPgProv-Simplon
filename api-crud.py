@@ -62,11 +62,13 @@ def delData(articleid):
 # _______________ ROUTES _______________
 
 @app.route('/v1/hello-world')
+CORS(app)
 def hello_world():
     return 'Hello World!'
 
 
 @app.route('/data', methods=['GET'])
+CORS(app)
 def parse_reqget():
     # Votre fonction pour lire les data d'un fichier
     data = readData()
@@ -74,6 +76,7 @@ def parse_reqget():
 
 
 @app.route('/data', methods=['POST'])
+CORS(app)
 def parse_reqpost():
     data = request.data  # Le payload de votre requete
     print(str(data))
@@ -82,6 +85,7 @@ def parse_reqpost():
 
 
 @app.route('/data/<articleid>', methods=['DELETE'])
+CORS(app)
 def parse_reqdel(articleid):
     result = delData(articleid)
     return 'You are deleting ' + articleid + ' : ' + result
