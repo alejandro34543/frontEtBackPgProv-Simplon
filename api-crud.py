@@ -15,81 +15,64 @@ from flask import *
 from flask_cors import CORS
 from os import path
 
-# HOME is a key within an environment file that points to the json file
-pathFile = os.environ['HOME']
-# pathFile = base64.b64decode(pathFileEncoded).decode('ascii') not necessary !?
-pathFile = pathFile.rstrip()  # using opaque in secret requires me to strip the '\n'
+from config import DATABASE_URI
+from model import Base, compte
+
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+
+engine = create_engine(DATABASE_URI)
+Base.metadata.create_all(engine)
+Session = sessionmaker(bind=engine)
+s = Session()
 
 app = Flask(__name__)
 
 # _______________ Fonctions ____________
-def readData():
-    with open(pathFile) as json_file:
-        datafile = json.load(json_file)
-    return datafile
+def readData(numb):
+    query = s.query(compte).filter_by(ID=numb)
+    return query.all()
 
 
 def putData(data):
-    if path.exists(pathFile):
-        with open(pathFile) as json_file:
-            datafile = json.load(json_file)
-
-        jdata = json.loads(data)
-        adata = jdata["test2"]
-        datafile["test2"].append(adata)
-
-        with open(pathFile, 'w') as outfile:
-            json.dump(datafile, outfile)
-        process = True
-    else:
-        process = False
-    return str(process)
-
-
-def delData(articleid):
-    if path.exists(pathFile):
-        datafile = readData()
-        datafile["test2"].pop(int(articleid))
-
-        with open(pathFile, 'w') as outfile:
-            json.dump(datafile, outfile)
-        process = True
-    else:
-        process = False
-    return str(process)
+    sqldata = json.loads(data)
+    tableEntry = compte(
+                ID=int(sqldata["ID"]),
+                Nom=sqldata["Nom"],
+                Owner=sqldata["Owner"],
+                User=sqldata["User"],
+                Password=sqldata["Password"],
+                Namespace=sqldata["Namespace"],
+            )
+    s.add(tableEntry)
+    s.commit()
 
 
 # _______________ ROUTES _______________
 
 @app.route('/v1/hello-world')
-CORS(app)
+#CORS(app)
 def hello_world():
     return 'Hello World!'
 
 
-@app.route('/data', methods=['GET'])
-CORS(app)
-def parse_reqget():
+@app.route('/data/<articleid>', methods=['GET'])
+#CORS(app)
+def parse_reqget(articleid):
     # Votre fonction pour lire les data d'un fichier
-    data = readData()
+    data = readData(articleid)
     return data
 
 
 @app.route('/data', methods=['POST'])
-CORS(app)
+#CORS(app)
 def parse_reqpost():
     data = request.data  # Le payload de votre requete
-    print(str(data))
     result = putData(data)
     return result
 
 
-@app.route('/data/<articleid>', methods=['DELETE'])
-CORS(app)
-def parse_reqdel(articleid):
-    result = delData(articleid)
-    return 'You are deleting ' + articleid + ' : ' + result
-
-
 if __name__ == '__main__':
-    app.run("0.0.0.0")
+    app.run()
+    #app.run("0.0.0.0")
