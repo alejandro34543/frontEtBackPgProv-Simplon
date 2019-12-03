@@ -44,7 +44,7 @@ def readData():
             'Password': i.Password
         }
         data.append(test)
-    return str(json.dumps(data)).replace('[', '').replace(']', '')
+    return str(json.dumps(data))
 
 
 # post
