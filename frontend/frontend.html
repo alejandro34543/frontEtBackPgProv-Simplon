@@ -27,19 +27,8 @@
     -->
 
     <script>
-      var response = "[{
-        "rank":"9",
-        "content":"Alon",
-        "UID":"5"
-       },
-       {
-         "rank":"6",
-         "content":"Tala",
-         "UID":"6"
-      }]";
-
       // convert string to JSON
-      response = $.parseJSON(response);
+
 
 
       $(function() {
@@ -48,6 +37,9 @@
           url: 'http://127.0.0.1:5000/data',
           timeout: 3000,
           success: function(data) {
+            console.log(data);
+            response = $.parseJSON(data);
+            console.log(response);
             $.each(response, function(i, item) {
               var $tr = $('<tr>').append(
                   $('<td>').text(item.ID),
