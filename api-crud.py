@@ -28,12 +28,26 @@ s = Session()
 app = Flask(__name__)
 CORS(app)
 
+
 # _______________ Fonctions ____________
+# get
 def readData():
-    query = s.query(compte)
-    return str(query.all())
+    result = s.query(compte)
+    data = []
+    for i in result:
+        test = {
+            'ID': i.ID,
+            'Name': i.Nom,
+            'Owner': i.Owner,
+            'Namespace': i.Namespace,
+            'User': i.User,
+            'Password': i.Password
+        }
+        data.append(test)
+    return str(json.dumps(data)).replace('[', '').replace(']', '')
 
 
+# post
 def putData(data):
     sqldata = json.loads(data)
     print(data)
@@ -49,6 +63,7 @@ def putData(data):
     s.add(tableEntry)
     s.commit()
 
+
 #Delete
 def delData(numb):
     query = s.query(compte).filter_by(ID=numb)
@@ -57,6 +72,7 @@ def delData(numb):
     return "TRUE"
 
 # _______________ ROUTES _______________
+
 
 @app.route('/v1/hello-world')
 def hello_world():
@@ -76,10 +92,12 @@ def parse_reqpost():
     putData(data)
     return 'True'
 
+
 @app.route('/data/<articleid>', methods=['DELETE'])
 def api_article(articleid):
     delData(articleid)
     return 'Vous avez supprimer ' + articleid
+
 
 if __name__ == '__main__':
     app.run()
