@@ -50,6 +50,12 @@ def putData(data):
     s.add(tableEntry)
     s.commit()
 
+#Delete
+def delData(numb):
+    query = s.query(compte).filter_by(ID=numb)
+    s.delete(query.one())
+    s.commit()
+    return "TRUE"
 
 # _______________ ROUTES _______________
 
@@ -74,6 +80,10 @@ def parse_reqpost():
     putData(data)
     return 'True'
 
+@app.route('/data/<articleid>', methods=['DELETE'])
+def api_article(articleid):
+    delData(articleid)
+    return 'Vous avez supprimer ' + articleid
 
 if __name__ == '__main__':
     app.run()
