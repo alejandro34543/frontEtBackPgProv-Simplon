@@ -12,6 +12,7 @@ import json
 import os
 import base64
 from flask import *
+from flask_cors import CORS
 from os import path
 
 # HOME is a key within an environment file that points to the json file
