@@ -29,14 +29,17 @@ s = Session()
 
 app = Flask(__name__)
 
+
 # _______________ Fonctions ____________
 def readData(numb):
     query = s.query(compte).filter_by(ID=numb)
-    return query.all()
+    return str(query.all())
 
 
 def putData(data):
     sqldata = json.loads(data)
+    print(data)
+    print(sqldata)
     tableEntry = compte(
                 ID=int(sqldata["ID"]),
                 Nom=sqldata["Nom"],
@@ -69,8 +72,8 @@ def parse_reqget(articleid):
 #CORS(app)
 def parse_reqpost():
     data = request.data  # Le payload de votre requete
-    result = putData(data)
-    return result
+    putData(data)
+    return 'True'
 
 
 if __name__ == '__main__':
