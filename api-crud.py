@@ -20,18 +20,17 @@ from model import Base, compte
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-
 engine = create_engine(DATABASE_URI)
 Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 s = Session()
 
 app = Flask(__name__)
-
+CORS(app)
 
 # _______________ Fonctions ____________
-def readData(numb):
-    query = s.query(compte).filter_by(ID=numb)
+def readData():
+    query = s.query(compte)
     return str(query.all())
 
 
@@ -60,21 +59,18 @@ def delData(numb):
 # _______________ ROUTES _______________
 
 @app.route('/v1/hello-world')
-#CORS(app)
 def hello_world():
     return 'Hello World!'
 
 
-@app.route('/data/<articleid>', methods=['GET'])
-#CORS(app)
-def parse_reqget(articleid):
+@app.route('/data', methods=['GET'])
+def parse_reqget():
     # Votre fonction pour lire les data d'un fichier
-    data = readData(articleid)
+    data = readData()
     return data
 
 
 @app.route('/data', methods=['POST'])
-#CORS(app)
 def parse_reqpost():
     data = request.data  # Le payload de votre requete
     putData(data)
