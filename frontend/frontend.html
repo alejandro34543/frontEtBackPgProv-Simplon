@@ -60,16 +60,16 @@
       
     <script>
     function productDelete(ctl){
-        {
-        $('#deleterow').click(function() {
-            $.ajax({
+        console.log($(ctl).attr('iddb'))
+        var id = $(ctl).attr('iddb')
+        var durl = "http://127.0.0.1:5000/data/" + id
+        console.log(durl)
+        $.ajax({
             type: 'DELETE',
-            url: 'http://127.0.0.1:5000/data/'+ctl+',    
-        }
+            url: durl,
+        });
         $(ctl).parents("tr").remove();
-        
-        
-    }
+    };
     </script>
     
     <script>
@@ -85,17 +85,21 @@
               $('#records_table').empty()
             //console.log(response);
             $.each(response, function(i, item) {
-              var $tr = $('<tr>').append(
-                  $('<td>').text(item.ID),
+              var ind = i;
+              //"<input type='hidden' id='sql) '>")
+              //console.log(hidden)
+              var $tr = $("<tr>").append(
+                  $("<td>").text(item.ID),
                   $('<td>').text(item.Name),
                   $('<td>').text(item.Owner),
                   $('<td>').text(item.User),
                   $('<td>').text(item.Password),
                   $('<td>').text(item.Namespace),
-                  "<td>" + "<button type='button'" +"onclick='productDelete("+item.ID+");' " +  "class='btn btn-default'>"
-                    
-              ).appendTo('#records_table')
+                  "<td>" + "<button  id='deleterow'  iddb=" + item.ID + " type='button' " + "onclick='productDelete(this);' " + "class='btn btn-default'>delete</button>"
+              ).appendTo('#records_table');
               //console.log($tr.wrap('<p>').html());
+              console.log(ind);
+              console.log(i);
             });
           },
           error: function() {
