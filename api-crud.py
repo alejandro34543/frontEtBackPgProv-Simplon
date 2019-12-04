@@ -6,7 +6,7 @@ API 1 --  to read, update and delete the SQL database
 John Armitage, Axel Alves 3/12/2019
 """
 
-import sqlalchemy
+
 import json
 import os
 import base64
@@ -89,6 +89,7 @@ def parse_reqget():
 @app.route('/data', methods=['POST'])
 def parse_reqpost():
     data = request.data  # Le payload de votre requete
+    print(data)
     putData(data)
     return 'True'
 

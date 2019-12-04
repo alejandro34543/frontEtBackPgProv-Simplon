@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8">
     <title>Ajax - La fonction ajax()</title>
+      
+    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
   </head>
+
+    
 
   <body>
 
@@ -19,40 +23,55 @@
         </tr>
     </table>
 
-    <button id="action">POST</button><br />
-
+    <!-- POST -->
+    <div id="divPost">
+        <form id="formPost">
+            <input type="text" name="postText" placeholder="Post...">
+        </form>
+    </div>
+    <button id="post">Post it</button><br />
+  
+    <!-- scripts -->
+    
     <script src="jquery.js"></script>
-    <!--<script>
-      $(function() {
-        $('#action').click(function() {
+    <script src="http://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+      
+      
+    <script>
+    // POST
+    $(function() {
+        $('#post').click(function() {
+          var text = $('#divPost').find('input[name="postText"]').val();
+          console.log(text);
+          console.log("HERE HERE")
+            
           $.ajax({
-            type: 'GET',
+            type: 'POST',
             url: 'http://127.0.0.1:5000/data',
+            data: text,
+            dataType: JSON,
             timeout: 3000,
-            success: function(data) {
-              alert(data); },
+            success: function(msg) {
+              alert(msg); },
             error: function() {
-              alert('La requête n\'a pas abouti'); }
+              alert('Post failed'); }
           });
         });
-      });
-      </script>
-    -->
-
+    });
+    </script>
+      
+    
     <script>
-      // convert string to JSON
-
-
-
+    // GET
       $(function() {
         $.ajax({
           type: 'GET',
           url: 'http://127.0.0.1:5000/data',
           timeout: 3000,
           success: function(data) {
-            console.log(data);
+            //console.log(data);
             response = $.parseJSON(data);
-            console.log(response);
+            //console.log(response);
             $.each(response, function(i, item) {
               var $tr = $('<tr>').append(
                   $('<td>').text(item.ID),
@@ -62,7 +81,7 @@
                   $('<td>').text(item.Password),
                   $('<td>').text(item.Namespace)
               ).appendTo('#records_table');
-              console.log($tr.wrap('<p>').html());
+              //console.log($tr.wrap('<p>').html());
             });
           },
           error: function() {
