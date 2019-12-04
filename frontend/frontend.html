@@ -20,6 +20,7 @@
             <th>User</th>
             <th>Password</th>
             <th>Namespace</th>
+            <th>DELETE</th>
         </tr>
     </table>
 
@@ -30,7 +31,6 @@
         </form>
     </div>
     <button id="post">Post it</button><br />
-  
     <!-- scripts -->
     
     <script src="jquery.js"></script>
@@ -58,6 +58,19 @@
     });
     </script>
       
+    <script>
+    function productDelete(ctl, i) {
+        //$('#deleterow').click(function() {
+          //  $.ajax({
+            //type: 'DELETE',
+            //url: 'http://127.0.0.1:5000/data/i',    
+    //    }
+        $(ctl).parents("tr").remove();
+        console.log(i);
+        
+        
+    }
+    </script>
     
     <script>
     // GET
@@ -77,10 +90,11 @@
                   $('<td>').text(item.Owner),
                   $('<td>').text(item.User),
                   $('<td>').text(item.Password),
-                  $('<td>').text(item.Namespace)
-              ).appendTo('#records_table');
-              // console.log($tr.wrap('<p>').html());
-              console.log(i);
+                  $('<td>').text(item.Namespace),
+                  "<td>" + "<button  id='deleterow' type='button' " +"onclick='productDelete(this, i);' " +  "class='btn btn-default'>"
+                    
+              ).appendTo('#records_table')
+              //console.log($tr.wrap('<p>').html());
             });
           },
           error: function() {
