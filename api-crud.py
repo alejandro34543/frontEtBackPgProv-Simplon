@@ -11,6 +11,7 @@ import json
 import os
 import base64
 from flask import *
+from flask import request
 from flask_cors import CORS
 from os import path
 
@@ -89,7 +90,7 @@ def parse_reqget():
 @app.route('/data', methods=['POST'])
 def parse_reqpost():
     data = request.data  # Le payload de votre requete
-    print(data)
+    print(request.data)
     putData(data)
     return 'True'
 

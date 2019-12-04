@@ -41,20 +41,18 @@
     // POST
     $(function() {
         $('#post').click(function() {
+
           var text = $('#divPost').find('input[name="postText"]').val();
-          console.log(text);
-          console.log("HERE HERE")
-            
-          $.ajax({
+
+           $.ajax({
             type: 'POST',
             url: 'http://127.0.0.1:5000/data',
             data: text,
-            dataType: JSON,
+            dataType: 'json',
+            contentType: 'application/json',
             timeout: 3000,
-            success: function(msg) {
-              alert(msg); },
-            error: function() {
-              alert('Post failed'); }
+            success: function(data) {
+              alert(data); },
           });
         });
     });
@@ -81,7 +79,8 @@
                   $('<td>').text(item.Password),
                   $('<td>').text(item.Namespace)
               ).appendTo('#records_table');
-              //console.log($tr.wrap('<p>').html());
+              // console.log($tr.wrap('<p>').html());
+              console.log(i);
             });
           },
           error: function() {
