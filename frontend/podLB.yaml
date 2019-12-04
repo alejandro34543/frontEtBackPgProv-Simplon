@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: load-apy
+spec:
+  selector:
+    role: load
+  ports:
+  - protocol:
+    port: 5000
+    targetPort: 5000
+  type: LoadBalancer
