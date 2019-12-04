@@ -82,6 +82,7 @@
           success: function(data) {
             //console.log(data);
             response = $.parseJSON(data);
+              $('#records_table').empty()
             //console.log(response);
             $.each(response, function(i, item) {
               var ind = i;
