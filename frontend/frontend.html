@@ -59,14 +59,14 @@
     </script>
       
     <script>
-    function productDelete(ctl, i) {
-        //$('#deleterow').click(function() {
-          //  $.ajax({
-            //type: 'DELETE',
-            //url: 'http://127.0.0.1:5000/data/i',    
-    //    }
+    function productDelete(ctl){
+        {
+        $('#deleterow').click(function() {
+            $.ajax({
+            type: 'DELETE',
+            url: 'http://127.0.0.1:5000/data/'+ctl+',    
+        }
         $(ctl).parents("tr").remove();
-        console.log(i);
         
         
     }
@@ -82,6 +82,7 @@
           success: function(data) {
             //console.log(data);
             response = $.parseJSON(data);
+              $('#records_table').empty()
             //console.log(response);
             $.each(response, function(i, item) {
               var $tr = $('<tr>').append(
@@ -91,7 +92,7 @@
                   $('<td>').text(item.User),
                   $('<td>').text(item.Password),
                   $('<td>').text(item.Namespace),
-                  "<td>" + "<button  id='deleterow' type='button' " +"onclick='productDelete(this, i);' " +  "class='btn btn-default'>"
+                  "<td>" + "<button type='button'" +"onclick='productDelete("+item.ID+");' " +  "class='btn btn-default'>"
                     
               ).appendTo('#records_table')
               //console.log($tr.wrap('<p>').html());
