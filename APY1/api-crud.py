@@ -8,12 +8,9 @@ John Armitage, Axel Alves 3/12/2019
 
 
 import json
-import os
-import base64
 from flask import *
 from flask import request
 from flask_cors import CORS
-from os import path
 
 from config import DATABASE_URI
 from model import Base, compte
@@ -102,6 +99,5 @@ def api_article(articleid):
 
 
 if __name__ == '__main__':
-    app.run()
-    #app.run("0.0.0.0")
-
+    #  app.run()
+    app.run('0.0.0.0')
