@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-pod-front
+  namespace: johnaxel-apy-ns
+  labels:
+    app: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: load
+  template:
+    metadata:
+      labels:
+        role: load
+    spec:
+      containers:
+      - name: pod-front
+        image: 435606335423.dkr.ecr.eu-west-1.amazonaws.com/john-axel-front:1.0.0
+        ports:
+        - containerPort: 80
+          name: web
+          protocol: TCP
+#        env:
+#        - name: HOME
+#          valueFrom:
+#            secretKeyRef:
+#              name: mysecret
+#              key: special.how 
+          #value: /app/data/test.json
+          #        volumeMounts:
+                #        - mountPath: /app/data/
+          #          name: vol1
+          #        ports:
+#       - containerPort: 5000
+#         name: var-vol
+#     volumes:
+#     - name: vol1
+#       persistentVolumeClaim:
+#          claimName: pvc
+#     initContainers:
+#      - name: creat-js 
+#       image: 435606335423.dkr.ecr.eu-west-1.amazonaws.com/axel-app:1.0.2
+#       volumeMounts:       
+#       - mountPath: /data/
+#         name: vol1
+#       command: [ "/bin/sh", "-c", "--" ]
+#       args: ["cp /app/data/test.json /data/test.json"]
+
+  
