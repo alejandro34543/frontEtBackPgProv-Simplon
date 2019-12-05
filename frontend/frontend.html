@@ -15,7 +15,7 @@
     <table id="records_table" border='1'>
         <tr>
             <th>ID</th>
-            <th>Name</th>
+            <th>Nom</th>
             <th>Owner</th>
             <th>User</th>
             <th>Password</th>
@@ -27,7 +27,7 @@
     <!-- POST -->
     <div id="divPost">
         <form id="formPost">
-            <input type="text" name="postText" placeholder="Post...">
+            <input type="text" name="postText" placeholder='{"ID":13,"Nom":"Bob","Owner":"God","User":"bb","Password":"123","Namespace":"white"}' size="50">
         </form>
     </div>
     <button id="post">Post it</button><br />
@@ -82,7 +82,7 @@
           success: function(data) {
             //console.log(data);
             response = $.parseJSON(data);
-              $('#records_table').empty()
+            //$('#records_table').empty()
             //console.log(response);
             $.each(response, function(i, item) {
               var ind = i;
