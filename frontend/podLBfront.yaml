@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: svc-load-apy
+  name: svc-load-front
 spec:
   selector:
-    tier: tier-apy1-backend
+    role: load-front
   ports:
   - protocol:
     port: 80
-    targetPort: 5000
+    targetPort: 80
   type: LoadBalancer
