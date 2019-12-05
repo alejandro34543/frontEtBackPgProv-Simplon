@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: NetworkPolicy
+metadata:
+  name: back-network-policy
+  namespace: johnaxel-apy-ns
+spec:
+  podSelector:
+    matchLabels:
+      tier: tier-apy1-backend
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress: {}
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          namespace: kube-system
+    - namespaceSelector:
+        matchLabels:
+          namespace: postgres
+    - podSelector:
+        matchLabels:
+          app: postgresql

@@ -1,0 +1,39 @@
+apiVersion: v1
+items:
+- apiVersion: extensions/v1beta1
+  kind: NetworkPolicy
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"networking.k8s.io/v1","kind":"NetworkPolicy","metadata":{"annotations":{},"name":"web-allow-all","namespace":"johnaxel-apy-ns"},"spec":{"egress":[{"to":[{"podSelector":{"matchLabels":{"app":"postgresql"}}},{"namespaceSelector":{"matchLabels":{"namespace":"postgres"}}},{"namespaceSelector":{"matchLabels":{"namespace":"kube-system"}}}]}],"ingress":[{}],"podSelector":{"matchLabels":{"app":"tier-apy1-backend"}},"policyTypes":["Ingress","Egress"]}}
+    creationTimestamp: "2019-12-05T14:17:33Z"
+    generation: 3
+    name: web-allow-all
+    namespace: johnaxel-apy-ns
+    resourceVersion: "1220634"
+    selfLink: /apis/extensions/v1beta1/namespaces/johnaxel-apy-ns/networkpolicies/web-allow-all
+    uid: fadffb02-1769-11ea-9f6c-06ddfdabc0ec
+  spec:
+    egress:
+    - to:
+      - podSelector:
+          matchLabels:
+            app: postgresql
+      - namespaceSelector:
+          matchLabels:
+            namespace: postgres
+      - namespaceSelector:
+          matchLabels:
+            namespace: kube-system
+    ingress:
+    - {}
+    podSelector:
+      matchLabels:
+        app: tier-apy1-backend
+    policyTypes:
+    - Ingress
+    - Egress
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""
