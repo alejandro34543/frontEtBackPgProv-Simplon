@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: cont-app1-backend
-        image: 435606335423.dkr.ecr.eu-west-1.amazonaws.com/john-axel-apy:1.0.5
+        image: 435606335423.dkr.ecr.eu-west-1.amazonaws.com/john-axel-apy:1.0.7
         env:
           - name: POST_USER
             valueFrom:
