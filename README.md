@@ -1,9 +1,8 @@
-# simplon-gekko-frontback
-###Building a frontend-backend to learn kubenetes
+##Building a frontend-backend to learn kubenetes
 
-Frontend: a html page with javascript using jQuery.js
-Backend: a python script using sqlalchemy and flask
-Database: a PostgreSQL based on a pod set up by the administrator (Loick)
+* Frontend: a html page with javascript using jQuery.js
+* Backend: a python script using sqlalchemy and flask
+* Database: a PostgreSQL based on a pod set up by the administrator (Loick)
 
 Build docker images for the frontend (`frontend`) and backend (`APY1`), e.g:
 ```buildoutcfg
