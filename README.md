@@ -1,4 +1,4 @@
-##Building a frontend-backend to learn kubenetes
+## Building a frontend-backend to learn kubenetes
 
 * Frontend: a html page with javascript using jQuery.js
 * Backend: a python script using sqlalchemy and flask
