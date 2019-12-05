@@ -6,7 +6,7 @@ API 1 --  to read, update and delete the SQL database
 John Armitage, Axel Alves 3/12/2019
 """
 
-
+import sys
 import json
 from flask import *
 from flask import request
@@ -77,19 +77,28 @@ def hello_world():
     return 'Hello World!'
 
 
-@app.route('/data', methods=['GET'])
-def parse_reqget():
-    # Votre fonction pour lire les data d'un fichier
-    data = readData()
-    return data
+    @app.route('/data', methods=['GET'])
+    def parse_reqget():
+        # Votre fonction pour lire les data d'un fichier
+        try:
+            data = readData()
+        except:
+            data = 'Unexpected error: {}'.format(sys.exc_info()[0])
+            pass
+        return data
 
 
-@app.route('/data', methods=['POST'])
-def parse_reqpost():
-    data = request.data  # Le payload de votre requete
-    print(request.data)
-    putData(data)
-    return 'True'
+    @app.route('/data', methods=['POST'])
+    def parse_reqpost():
+        data = request.data  # Le payload de votre requete
+        print(request.data)
+        try:
+            putData(data)
+            success = 'True'
+        except:
+            success = 'Unexpected error: {}'.format(sys.exc_info()[0])
+            pass
+        return success
 
 
 @app.route('/data/<articleid>', methods=['DELETE'])
