@@ -9,15 +9,15 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      role: load
+      role: load-front
   template:
     metadata:
       labels:
-        role: load
+        role: load-front
     spec:
       containers:
       - name: pod-front
-        image: 435606335423.dkr.ecr.eu-west-1.amazonaws.com/john-axel-front:1.0.0
+        image: 435606335423.dkr.ecr.eu-west-1.amazonaws.com/john-axel-front:1.0.4
         ports:
         - containerPort: 80
           name: web

@@ -5,7 +5,7 @@ metadata:
   labels:
     app: apy1-backend
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       tier: tier-apy1-backend
