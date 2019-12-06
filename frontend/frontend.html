@@ -46,7 +46,7 @@
 
            $.ajax({
             type: 'POST',
-            url: 'http://ad02a3f94173d11ea9df302af6eaa18b-294989486.eu-west-1.elb.amazonaws.com/data',
+            url: 'http://<URL Du Load Balancer de votre API >/data',
             data: text,
             dataType: 'json',
             contentType: 'application/json',
@@ -63,7 +63,7 @@
     function productDelete(ctl){
         console.log($(ctl).attr('iddb'))
         var id = $(ctl).attr('iddb')
-        var durl = "http://ad02a3f94173d11ea9df302af6eaa18b-294989486.eu-west-1.elb.amazonaws.com/data/" + id
+        var durl = "http://<URL Du Load Balancer de votre API >/data/" + id
         console.log(durl)
         $.ajax({
             type: 'DELETE',
@@ -78,7 +78,7 @@
       $(function() {
         $.ajax({
           type: 'GET',
-          url: 'http://ad02a3f94173d11ea9df302af6eaa18b-294989486.eu-west-1.elb.amazonaws.com/data',
+          url: 'http://<URL Du Load Balancer de votre API >/data',
           timeout: 3000,
           success: function(data) {
             //console.log(data);
