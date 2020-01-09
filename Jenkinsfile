@@ -1,6 +1,6 @@
 podTemplate(containers: [
   containerTemplate(name: 'docker', image: 'docker:1.11', command: 'cat', ttyEnabled: true),
-  containerTemplate(name: 'python', image: 'python:2', command: 'cat', ttyEnabled: true),
+  containerTemplate(name: 'python', image: 'python:3', command: 'cat', ttyEnabled: true),
   containerTemplate(name: 'aws', image: 'xueshanf/awscli:3.10-alpine', command: 'cat', ttyEnabled: true),
 ],
 volumes: [
@@ -13,7 +13,7 @@ volumes: [
               sh '''
               git config --global user.name $USERNAME
               git config --global user.email $USERNAME@gmail.com
-              git clone https://$USERNAME:$PASSWORD@github.com/......
+              git clone https://$USERNAME:$PASSWORD@github.com/frontEtBackPgProv-Simplon
               cd .......
               GIT_COMMIT="$(git rev-parse HEAD)"
               echo '###### Git START ########'
