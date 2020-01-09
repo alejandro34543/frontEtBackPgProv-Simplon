@@ -30,11 +30,12 @@ volumes: [
           stage('Push Image In ECR'){
               container('aws'){
                   sh '''
+                  aws ecr create-repository --region eu-west-1 --repository-name alejandro-dev
                   '''
               }
               container('docker'){
                   sh '''
-                  ....
+                  docker build
                   docker tag $IMAGE $IMAGELATEST
                   docker push $IMAGE
                   docker push $IMAGELATEST
