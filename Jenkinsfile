@@ -7,9 +7,9 @@ volumes: [
   hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
 ]){
     node(POD_LABEL){
-        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AWS_Dotaki_Preprod_Cred']]){
+        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AWS_CRED']]){
           stage('Build Image'){
-            withCredentials([usernamePassword(credentialsId: 'gitCredDotaki', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
+            withCredentials([usernamePassword(usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
               sh '''
               git config --global user.name $USERNAME
               git config --global user.email $USERNAME@gmail.com
