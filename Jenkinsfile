@@ -25,11 +25,6 @@ volumes: [
               echo 'export REPO=******.dkr.ecr.eu-west-1.amazonaws.com/******' >> ./load_env.sh
               chmod 750 ./load_env.sh
               '''
-              container('python'){
-                  sh '''
-....
-                  '''
-              }
             }
           }
           stage('Push Image In ECR'){
