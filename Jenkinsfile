@@ -9,20 +9,20 @@ volumes: [
     node(POD_LABEL){
         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AWS_CRED']]){
           stage('Build Image'){
-            withCredentials([usernamePassword(usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
+            withCredentials([usernamePassword(credentialsId: 'GitCred', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
               sh '''
               git config --global user.name $USERNAME
               git config --global user.email $USERNAME@gmail.com
               git clone https://$USERNAME:$PASSWORD@github.com/frontEtBackPgProv-Simplon
-              cd .......
+              cd APY1
               GIT_COMMIT="$(git rev-parse HEAD)"
               echo '###### Git START ########'
               echo $GIT_COMMIT
               echo '###### Git END ########'
-              echo 'export IMAGE=*******.dkr.ecr.eu-west-1.amazonaws.com/******:'$GIT_COMMIT > ./load_env.sh
-              echo 'export IMAGELATEST=******.dkr.ecr.eu-west-1.amazonaws.com/******:latest' >> ./load_env.sh
+              echo 'export IMAGE=591457218380.dkr.ecr.eu-west-1.amazonaws.com/******:'$GIT_COMMIT > ./load_env.sh
+              echo 'export IMAGELATEST=591457218380.dkr.ecr.eu-west-1.amazonaws.com/******:latest' >> ./load_env.sh
               echo 'export GIT_COMMIT='$GIT_COMMIT >> ./load_env.sh
-              echo 'export REPO=******.dkr.ecr.eu-west-1.amazonaws.com/******' >> ./load_env.sh
+              echo 'export REPO=591457218380.dkr.ecr.eu-west-1.amazonaws.com/alejandro-dev' >> ./load_env.sh
               chmod 750 ./load_env.sh
               '''
             }
